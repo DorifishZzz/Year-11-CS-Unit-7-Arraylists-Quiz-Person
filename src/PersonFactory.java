@@ -8,24 +8,14 @@ public class PersonFactory {
         allPersons = new ArrayList<>();
     }
 
-    public void addPerson(Person person) {
-        allPersons.add(person);
-        for(int i = allPersons.size()-1; i >= 0; i --){
-                String w = allPersons.get(i).getLastName();
-                String q = allPersons.get(i-1).getLastName();
-
-            if(w.compareTo(q) == 1){
-                allPersons.set(i, allPersons.get(i-1));
+    public void addPerson(Person newPerson) {
+        for (int i = 0; i < allPersons.size(); i++) {
+            if (newPerson.getLastName().compareTo(allPersons.get(i).getLastName()) <= 0) {
+                allPersons.add(i, newPerson);
+                return;
             }
-            if(w.compareTo(q) == -1){
-                continue;
-            }
-            if(w.compareTo(q) == 0) {
-                continue;
-            }
-
         }
-
+        allPersons.add(0,newPerson);
     }
 
     public ArrayList<Person> under18() {
